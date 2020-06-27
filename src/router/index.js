@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import UserTable from "../components/UserTable"
 import Profile from "../components/Profile"
+import NotFound from "../view/NotFound"
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ Vue.use(VueRouter)
     path: '/profile/:id',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: NotFound
   }
 ]
 

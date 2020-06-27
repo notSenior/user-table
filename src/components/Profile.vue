@@ -1,5 +1,8 @@
 <template>
-    <div class="mdl-grid">
+    <div v-if="error">
+        <h1>User is not found</h1>
+    </div>
+    <div v-else class="mdl-grid">
         <div class="mdl-grid mdl-cell mdl-cell--6-col mdl-cell--3-offset">
             <div class="frame mdl-cell mdl-cell--3-col mdl-card mdl-shadow--2dp">
                 <img class="avatar" :src="user.avatar">
@@ -46,13 +49,15 @@ import axios from "axios"
 export default {
     data(){
         return {
+            error: false,
             user: {}
         }
     },
     methods:{
         getUser(){
             axios.get("https://reqres.in/api/users/"+this.$route.params.id).then(res=> this.user = res.data.data)
-            .catch(function (error) {
+            .catch(error=> {
+                this.error = true
                 console.log(error);
             });
         }
